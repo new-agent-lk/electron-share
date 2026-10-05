@@ -3,7 +3,6 @@ import contain from 'licia/contain'
 import types from 'licia/types'
 import { app, ipcMain, nativeTheme } from 'electron'
 import { isDev } from '../../common/util'
-import { fileURLToPath } from 'url'
 import log from '../../common/log'
 import endWith from 'licia/endWith'
 import pkg from '../../../../package.json'
@@ -12,9 +11,6 @@ import { promisify } from 'util'
 import { createHash } from 'crypto'
 
 const execAsync = promisify(_exec)
-
-// @ts-ignore
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 export function resolve(p) {
   if (isDev()) {
