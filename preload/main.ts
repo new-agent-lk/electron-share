@@ -2,6 +2,8 @@ import { invoke } from './util'
 import types from 'licia/types'
 import { ipcRenderer } from 'electron'
 import {
+  IpcClipboardFromDevice,
+  IpcGetClipboardFiles,
   IpcGetCpuAndMem,
   IpcGetFileIcon,
   IpcGetLanguage,
@@ -17,7 +19,11 @@ import {
   IpcOpenPath,
   IpcOpenWindow,
   IpcResolveResources,
+  IpcScrcpyCheckUpdate,
+  IpcScrcpyGetVersions,
+  IpcScrcpyUpdateNow,
   IpcSendToWindow,
+  IpcSetClipboardSync,
   IpcSetStore,
   IpcShowContextMenu,
   IpcShowItemInFolder,
@@ -62,6 +68,12 @@ export default {
   showProcess: invoke('showProcess'),
   getFileIcon: invoke<IpcGetFileIcon>('getFileIcon'),
   showVideo: invoke<IpcShowVideo>('showVideo'),
+  scrcpyCheckUpdate: invoke<IpcScrcpyCheckUpdate>('scrcpyCheckUpdate'),
+  scrcpyGetVersions: invoke<IpcScrcpyGetVersions>('scrcpyGetVersions'),
+  scrcpyUpdateNow: invoke<IpcScrcpyUpdateNow>('scrcpyUpdateNow'),
+  setClipboardSync: invoke<IpcSetClipboardSync>('setClipboardSync'),
+  clipboardFromDevice: invoke<IpcClipboardFromDevice>('clipboardFromDevice'),
+  getClipboardFiles: invoke<IpcGetClipboardFiles>('getClipboardFiles'),
   closeWin: invoke('closeWin'),
   toggleWinMaximize: invoke('toggleWinMaximize'),
   hideWin: invoke('hideWin'),

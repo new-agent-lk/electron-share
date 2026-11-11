@@ -29,6 +29,8 @@ import fs from 'fs-extra'
 import path from 'path'
 import os from 'os'
 import { getSettingsStore } from '../../../main/lib/store'
+import * as scrcpyUpdater from '../../../main/lib/scrcpy-updater'
+import * as clipboardSync from '../../../main/lib/clipboard-sync'
 
 const settingsStore = getSettingsStore()
 const memStore = getMemStore()
@@ -132,7 +134,9 @@ export function init() {
     const win = BrowserWindow.fromWebContents(event.sender)
     if (win) {
       win.focus()
-      contextMenu(x, y, template)
+      // Route menu clicks back to the window that opened the menu, not the
+      // last-focused window (two windows can be open at once).
+      contextMenu(x, y, template, win.webContents)
     }
   })
   ipcMain.handle('closeWin', (event) => {
@@ -186,4 +190,10 @@ export function init() {
   ))
   handleEvent('getCpuAndMem', processWindow.getCpuAndMem)
   handleEvent('getFileIcon', getFileIcon)
+  handleEvent('scrcpyCheckUpdate', scrcpyUpdater.checkLatest)
+  handleEvent('scrcpyGetVersions', scrcpyUpdater.getVersions)
+  handleEvent('scrcpyUpdateNow', scrcpyUpdater.install)
+  handleEvent('setClipboardSync', clipboardSync.setEnabled)
+  handleEvent('clipboardFromDevice', clipboardSync.writeFromDevice)
+  handleEvent('getClipboardFiles', clipboardSync.getClipboardFiles)
 }

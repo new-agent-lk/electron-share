@@ -58,3 +58,20 @@ export type IpcOpenDevtools = (webContentsId: number) => void
 export type IpcGetCpuAndMem = () => Promise<{ cpu: number; memory: number }>
 export type IpcGetFileIcon = (ext: string) => Promise<string>
 export type IpcShowVideo = (url: string) => void
+export type IpcScrcpyCheckUpdate = () => Promise<{
+  version: string
+  assetUrl: string
+}>
+export type IpcScrcpyGetVersions = () => Promise<{
+  bundled: string
+  installed: string
+  latest: string
+  maxSupported: string
+}>
+export type IpcScrcpyUpdateNow = (version: string) => Promise<void>
+export type IpcSetClipboardSync = (options: {
+  enabled: boolean
+  deviceId?: string
+}) => void
+export type IpcClipboardFromDevice = (text: string) => void
+export type IpcGetClipboardFiles = () => Promise<string[]>
